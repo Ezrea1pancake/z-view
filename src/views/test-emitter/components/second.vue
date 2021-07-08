@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import ComponentThird from './Third'
+import ComponentThird from './third'
 
 export default {
   name: 'ComponentSecond',

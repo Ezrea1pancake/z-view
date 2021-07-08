@@ -1,8 +1,9 @@
 <template>
   <div>
-    <label v-if="label">{{label}}</label>
+    <label v-if="label" :class="{'z-form-item-label-reqiured': isRequired}">{{label}}</label>
     <div>
       <slot />
+      <div v-if="validateState === 'error'" class="z-form-item-message">{{ validateMessage }}</div>
     </div>
   </div>
 </template>
@@ -29,6 +30,8 @@ export default {
 
   data () {
     return {
+      isRequired: false,
+      initialValue: '',
       // 校验状态
       validateState: '',
       // 校验不通过信息
@@ -46,6 +49,9 @@ export default {
     // 如果没有传入prop，则无需校验
     if (!this.prop) return
     this.dispatch('zForm', 'on-form-item-add', this)
+
+    this.initialValue = this.fieldValue
+
     this.setRules()
   },
 
@@ -56,6 +62,13 @@ export default {
 
   methods: {
     setRules () {
+      const rules = this.getRules()
+      if (rules.length) {
+        rules.every(rule => {
+          this.isRequired = rule.required
+        })
+      }
+
       this.$on('on-form-change', this.onFieldChange)
       this.$on('on-form-blur', this.onFieldBlur)
     },
@@ -76,7 +89,7 @@ export default {
      * @param callback 校验完成回调函数
      */
     validate (trigger, callback = () => {}) {
-      const rules = this.getFilteredRule(trigger)
+      const rules = this.getFilterRule(trigger)
 
       if (!rules || rules.length === 0) {
         return true
@@ -106,6 +119,13 @@ export default {
     },
     onFieldChange () {
       this.validate('change')
+    },
+    // 重置校验数据
+    resetField () {
+      this.validateState = ''
+      this.validateMessage = ''
+
+      this.form.model[this.prop] = this.initialValue
     }
   }
 }
@@ -114,8 +134,12 @@ export default {
 
 <style lang="less" scoped>
 
-.container {
-
+.z-form-item-label-required:before {
+  content: '*';
+  color: red;
+}
+.z-form-item-message {
+  color: red;
 }
 
 </style>

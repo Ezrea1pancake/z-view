@@ -22,9 +22,18 @@ export default {
     }
   },
 
+  watch: {
+    value: {
+      handler (value) {
+        this.currentValue = value
+      },
+      immediate: true
+    }
+  },
+
   data () {
     return {
-      currentValue: this.value
+      currentValue: ''
     }
   },
 

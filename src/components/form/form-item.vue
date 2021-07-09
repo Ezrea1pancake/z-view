@@ -64,9 +64,7 @@ export default {
     setRules () {
       const rules = this.getRules()
       if (rules.length) {
-        rules.every(rule => {
-          this.isRequired = rule.required
-        })
+        this.isRequired = rules.some(rule => rule.required)
       }
 
       this.$on('on-form-change', this.onFieldChange)

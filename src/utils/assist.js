@@ -59,10 +59,9 @@ function findComponentsDownward (context, componentName) {
   // }
 
   // return children
-
   return context.$children.reduce((components, child) => {
     if (child.$options.name === componentName) components.push(child)
-    if (child.$children.length) components.concat(findComponentsDownward(child, componentName))
+    return components.concat(findComponentsDownward(child, componentName))
   }, [])
 }
 

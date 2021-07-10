@@ -8,6 +8,20 @@
       <z-form-item label="邮箱" prop="mail">
         <z-input v-model="formValidate.mail"></z-input>
       </z-form-item>
+      <z-form-item label="多选框" prop="check">
+        <z-checkbox v-model="formValidate.check" trueValue="1" falseValue="0"></z-checkbox>
+      </z-form-item>
+      <z-form-item label="多选框组" prop="checkGroup">
+        <z-checkbox-group v-model="formValidate.checkGroup">
+          <template v-for="(item, index) in checkGroupList">
+            <z-checkbox
+              :key="index"
+              :value="item.value"
+              :label="item.label"
+            ></z-checkbox>
+          </template>
+        </z-checkbox-group>
+      </z-form-item>
     </z-form>
     <button @click="handleSubmit">提交</button>
     <button @click="handleReset">重置</button>
@@ -17,22 +31,46 @@
 import zForm from '@/components/form/form.vue'
 import zFormItem from '@/components/form/form-item.vue'
 import zInput from '@/components/input/input.vue'
+import zCheckboxGroup from '@/components/checkbox/checkbox-group.vue'
+import zCheckbox from '@/components/checkbox/checkbox.vue'
 
 export default {
-  components: { zForm, zFormItem, zInput },
+  components: { zForm, zFormItem, zInput, zCheckboxGroup, zCheckbox },
   data () {
     return {
       formValidate: {
         name: '',
-        mail: ''
+        mail: '',
+        check: '',
+        checkGroup: []
       },
+      checkGroupList: [
+        {
+          label: '选项1',
+          value: 'a'
+        },
+        {
+          label: '选项2',
+          value: 'b'
+        },
+        {
+          label: '选项3',
+          value: 'c'
+        }
+      ],
       ruleValidate: {
         name: [
-          { required: true, message: '用户名不能为空', trigger: 'blur' }
+          { required: true, message: '用户名不能为空' }
         ],
         mail: [
-          { required: true, message: '邮箱不能为空', trigger: 'blur' },
-          { type: 'email', message: '邮箱格式不正确', trigger: 'blur' }
+          { required: true, message: '邮箱不能为空' },
+          { type: 'email', message: '邮箱格式不正确' }
+        ],
+        check: [
+          { required: true, message: '多选框不能为空' }
+        ],
+        checkGroup: [
+          { required: true, message: '多选框组不能为空' }
         ]
       }
     }

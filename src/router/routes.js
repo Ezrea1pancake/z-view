@@ -13,5 +13,10 @@ export const routes = [
     path: '/display',
     name: 'display',
     component: () => import('@/views/display')
+  },
+  {
+    path: '/alert',
+    name: 'alert',
+    component: () => import('@/views/alert')
   }
 ]

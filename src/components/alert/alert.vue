@@ -5,7 +5,14 @@
     </div>
   </div>
 </template>
+
 <script>
+let seed = 0
+
+function getUuid () {
+  return `alert_${seed++}`
+}
+
 export default {
   name: 'alert',
 
@@ -13,9 +20,30 @@ export default {
     return {
       notices: []
     }
+  },
+
+  methods: {
+    add (notice) {
+      const name = getUuid()
+
+      const _notice = Object.assign({
+        name
+      }, notice)
+
+      this.notices.push(_notice)
+
+      const duration = _notice.duration
+      setTimeout(() => {
+        this.remove(name)
+      }, duration * 1000)
+    },
+    remove (name) {
+      this.notices.splice(this.notices.findIndex(item => item.name === name), 1)
+    }
   }
 }
 </script>
+
 <style>
   .alert{
     position: fixed;

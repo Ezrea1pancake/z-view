@@ -82,11 +82,13 @@ export default {
     },
     destoryCode () {
       const $target = document.getElementById(this.id)
-      if ($target) $target.parentNode.removeChild($target)
+      if ($target) {
+        $target.parentNode.removeChild($target)
+      }
 
       if (this.component) {
-        this.$refs.display.removeChild(this.component)
-        this.component.$destory()
+        this.$refs.display.removeChild(this.component.$el)
+        this.component.$destroy()
         this.component = null
       }
     }

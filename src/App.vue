@@ -32,6 +32,8 @@ export default {
 
   methods: {
     navigate (item) {
+      const { fullPath } = this.$route
+      if (fullPath.includes(item.path)) return
       this.$router.push(item.path)
     }
   }

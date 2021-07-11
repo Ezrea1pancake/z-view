@@ -8,5 +8,10 @@ export const routes = [
     path: '/form',
     name: 'form',
     component: () => import('@/views/form')
+  },
+  {
+    path: '/display',
+    name: 'display',
+    component: () => import('@/views/display')
   }
 ]

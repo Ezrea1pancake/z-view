@@ -18,5 +18,10 @@ export const routes = [
     path: '/alert',
     name: 'alert',
     component: () => import('@/views/alert')
+  },
+  {
+    path: '/table-index',
+    name: 'tableIndex',
+    component: () => import('@/views/table-render')
   }
 ]

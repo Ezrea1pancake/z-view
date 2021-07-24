@@ -20,8 +20,28 @@ export const routes = [
     component: () => import('@/views/alert')
   },
   {
-    path: '/table-index',
-    name: 'tableIndex',
-    component: () => import('@/views/table-render')
+    path: '/table1',
+    name: 'table1',
+    component: () => import('@/views/table/table1')
+  },
+  {
+    path: '/table2',
+    name: 'table2',
+    component: () => import('@/views/table/table2')
+  },
+  {
+    path: '/table3',
+    name: 'table3',
+    component: () => import('@/views/table/table3')
+  },
+  {
+    path: '/table4',
+    name: 'table4',
+    component: () => import('@/views/table/table4')
+  },
+  {
+    path: '/tree',
+    name: 'tree',
+    component: () => import('@/views/tree')
   }
 ]

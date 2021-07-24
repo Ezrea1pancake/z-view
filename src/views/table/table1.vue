@@ -1,16 +1,16 @@
 <template>
   <div>
-    <table-render :columns="columns" :data="data"></table-render>
+    <table-render-component :columns="columns" :data="data"></table-render-component>
   </div>
 </template>
 
 <script>
-import TableRender from '@/components/table-render/table'
+import TableRenderComponent from '@/components/table-render/table'
 
 export default {
-  name: 'tableIndex',
+  name: 'tableRender',
 
-  components: { TableRender },
+  components: { TableRenderComponent },
 
   data () {
     return {
@@ -187,7 +187,7 @@ export default {
       editIndex: -1,
       editName: '',
       editAge: '',
-      editBrithday: '',
+      editBirthday: '',
       editAddress: ''
     }
   }

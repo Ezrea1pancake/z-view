@@ -23,7 +23,7 @@ export default {
       let name = parent.$options.name
 
       // 递归向上寻找匹配的父节点
-      while (!name || name !== componentName) {
+      while (parent && (!name || name !== componentName)) {
         parent = parent.$parent
 
         if (parent) {
